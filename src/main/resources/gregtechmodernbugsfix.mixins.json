@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "phoupraw.mcmod.gregtechmodernbugsfix.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "gtceu.MNotifiableItemStackHandler"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

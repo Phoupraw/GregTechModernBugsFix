@@ -1,0 +1,22 @@
+# idea
+.idea/
+*.iml
+*.ipr
+*.iws
+# java
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+.profileconfig.json
+## gradle
+.gradle/
+/build/
+/out/
+## minecraft
+/run/
+/src/main/generated/.cache
+### fabric
+### neo
+/runs/
+/src/generated/resources/.cache

@@ -1,0 +1,3 @@
+# 0.0.1
+## 新增
+- 修复了[#3730](https://github.com/GregTechCEu/GregTech-Modern/issues/3730)

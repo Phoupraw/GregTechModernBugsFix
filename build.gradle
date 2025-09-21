@@ -1,0 +1,112 @@
+//file:noinspection GroovyAssignabilityCheck
+plugins {
+    id('java-library')
+    id('maven-publish')
+    id('idea')
+    id('net.neoforged.moddev').version("${mod_dev_gradle}")//全局属性
+}
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+version = mod_version
+group = maven_group
+base {
+    archivesName = archives_base_name
+}
+neoForge {
+    version = "${neo}"
+    parchment {
+        minecraftVersion = "${mappings_minecraft}"
+        mappingsVersion = "${mappings_version}"
+    }
+    runs {
+        client {
+            client()
+            programArgument("--username=Phoupraw")
+        }
+        data {
+            data()
+            programArguments.addAll(
+              '--mod', "${mod_id}",
+              '--all',
+              '--output', file('src/generated/resources/').getAbsolutePath(),
+              '--existing', file('src/main/resources/').getAbsolutePath()
+            )
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets['main'])
+        }
+    }
+}
+//全局仓库 file:///%USERPROFILE%/.gradle/init.d/repositories.gradle
+dependencies {
+    //## mod依赖
+    api("net.neoforged:neoforge:${neo}")
+    //api("org.appliedenergistics:appliedenergistics2:${ae2}")
+    api("dev.emi:emi-neoforge:${emi}")
+    //api("de.mari_023:ae2wtlib_api:${ae2wt_api}")
+    //api("de.mari_023:ae2wtlib:${ae2wt}")
+    api("com.gregtechceu.gtceu:gtceu-1.21.1:${gtm}")
+    api("maven.modrinth:jade:${jade}+neoforge")
+    //## 非mod依赖
+    compileOnlyApi(annotationProcessor("org.projectlombok:lombok:${lombok}"))//全局属性
+    if (manifold_enabled.toBoolean()) {
+        //include(api("systems.manifold:manifold-ext-rt:${manifold}"))//全局属性
+        compileOnlyApi(annotationProcessor("systems.manifold:manifold-ext:${manifold}"))//全局属性
+    }
+    //## 非依赖
+}
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+tasks.withType(ProcessResources).configureEach {
+    inputs.property('mod_version', mod_version)
+    inputs.files('README.md', 'README-en.md')
+    var properties = [
+      'mod_id'     : mod_id,
+      'mod_version': mod_version,
+    ]
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(properties)
+    }
+    from('README.md', 'README-en.md').into('/')
+}
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    options.encoding = 'UTF-8'
+    if (manifold_enabled.toBoolean()) {
+        options.compilerArgs += '-Xplugin:Manifold --no-bootstrap'
+    }
+}
+jar {
+    archiveFileName = "${builtJarName()}.jar"
+}
+sourcesJar {
+    archiveFileName = "${builtJarName()}-sources.jar"
+}
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            artifactId = "${archives_base_name}-${mc}"
+            from(components['java'] as SoftwareComponent)
+        }
+    }
+}
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+String builtJarName() {
+    return "${archives_base_name}-${mc}-${version}"
+}
