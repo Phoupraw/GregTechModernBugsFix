@@ -55,6 +55,7 @@ dependencies {
     //api("de.mari_023:ae2wtlib_api:${ae2wt_api}")
     //api("de.mari_023:ae2wtlib:${ae2wt}")
     api("com.gregtechceu.gtceu:gtceu-1.21.1:${gtm}")
+    //compileClasspath(files('$PROJECT_DIR$/../GregTech-Modern/src/main/java'))
     api("maven.modrinth:jade:${jade}+neoforge")
     //## 非mod依赖
     compileOnlyApi(annotationProcessor("org.projectlombok:lombok:${lombok}"))//全局属性
@@ -63,6 +64,8 @@ dependencies {
         compileOnlyApi(annotationProcessor("systems.manifold:manifold-ext:${manifold}"))//全局属性
     }
     //## 非依赖
+    compileOnly(gradleApi())
+    compileOnly(localGroovy())
 }
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
@@ -104,9 +107,47 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+        //iml{
+        //    whenMerged {module->
+        //        println module
+        //    }
+        //}
     }
 }
-
+//idea.project.ipr {
+//    withXml { provider ->
+//        provider.node.component
+//          .find { it.@name == 'VcsDirectoryMappings' }
+//          .mapping.@vcs = 'Git'
+//    }
+//}
 String builtJarName() {
     return "${archives_base_name}-${mc}-${version}"
 }
+
+//afterEvaluate {
+//    def filePath = projectDir.toPath().resolve('.idea/libraries/Gradle__com_gregtechceu_gtceu_gtceu_1_21_1_7_1_0_SNAPSHOT.xml').toAbsolutePath()
+//    //def content = '''
+//    //    <component name="libraryTable">
+//    //      <library name="Gradle: com.gregtechceu.gtceu:gtceu-1.21.1:7.1.0-SNAPSHOT" type="java-imported" external-system-id="GRADLE">
+//    //        <properties groupId="com.gregtechceu.gtceu" artifactId="gtceu-1.21.1" version="7.1.0-SNAPSHOT" baseVersion="7.1.0-SNAPSHOT" />
+//    //        <CLASSES>
+//    //          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gregtechceu.gtceu/gtceu-1.21.1/7.1.0-SNAPSHOT/2de0a1d924766ebd4be11c9a5818ec687f8d99fc/gtceu-1.21.1-7.1.0-SNAPSHOT.jar!/" />
+//    //        </CLASSES>
+//    //        <JAVADOC />
+//    //        <SOURCES>
+//    //          <root url="file://$PROJECT_DIR$/../GregTech-Modern/src/main/java" />
+//    //        </SOURCES>
+//    //      </library>
+//    //    </component>'''
+//    //Files.writeString(filePath, content)
+//    //println filePath
+//    if (Files.exists(filePath)) {
+//        def content = Files.readString(filePath)
+//        //println content
+//        def modified = content.replaceFirst('jar.*?-sources\\.jar!/', 'file://\\$PROJECT_DIR\\$/../GregTech-Modern/src/main/java')
+//        //println modified
+//        Files.writeString(filePath, modified)
+//        //processIdeaSettings
+//    }
+//}

@@ -3,10 +3,9 @@
   "minVersion": "0.8",
   "package": "phoupraw.mcmod.gregtechmodernbugsfix.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "gtceu.MNotifiableItemStackHandler"
-  ],
+  "mixins": ["gtceu.MGTEmiRecipe", "gtceu.MNotifiableItemStackHandler"],
   "client": [
+    "gtceu.MSlotWidget", "ldlib.ASlotWidget", "ldlib.MModularEmiRecipe"
   ],
   "injectors": {
     "defaultRequire": 1
