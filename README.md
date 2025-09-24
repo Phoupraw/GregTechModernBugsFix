@@ -1,4 +1,8 @@
+[中文](./README.md)
+[English](./README-en.md)
 # 格雷科技现代版漏洞修复
+[![Modrinth](https://img.shields.io/modrinth/dt/gregtech-modern-bugs-fix?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c)](https://modrinth.com/mod/infinite-fluid-bucket)
+
 修复格雷科技现代版的一些漏洞。
 ## 内容
 由于GTM 1.21开发人员缺失，导致GTM 1.21的许多良性或恶性漏洞连续数月没有得到修复，为了使我（和其他玩家）能够顺利游玩GTM 1.21，我制作了这个模组，使用Mixin修改GTM和LDLIB的代码，以此修复漏洞。
@@ -8,8 +12,13 @@
 **注意！**这个模组只是为了使作者自己的存档正确运行，所以采用的修复方式有时比较激进，不保证不产生新的漏洞，不保证适用于所有快照版本。请在使用本模组时注意备份存档（其实玩GTM 1.21本身就应该频繁备份存档）。
 
 目前已修复的漏洞：
-- [#3730](https://github.com/GregTechCEu/GregTech-Modern/issues/3730)
-- [#1607](https://github.com/GregTechCEu/GregTech-Modern/issues/1607)
+- [#3730 Machines don't recognize splitted item stack](https://github.com/GregTechCEu/GregTech-Modern/issues/3730)
+  - `MNotifiableItemStackHandler`
+- [#1607 Can't get stack by EMI from multiblock recipe page](https://github.com/GregTechCEu/GregTech-Modern/issues/1607)
+  - `MSlotWidget`
+  - `GregTechModernBugsFixClient.afterKeyPressed`
+- [#3963 Use prospector in offhand always in ore mode](https://github.com/GregTechCEu/GregTech-Modern/issues/3963)
+  - `MProspectorScannerBehavior`
 ## 用法
 像其他模组一样直接安装此模组即可，只要运行，对漏洞的修复就生效。
 ## 兼容性

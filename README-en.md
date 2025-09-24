@@ -1,4 +1,8 @@
+[中文](./README.md)
+[English](./README-en.md)
 # GregTech Modern Bugs Fix
+[![Modrinth](https://img.shields.io/modrinth/dt/gregtech-modern-bugs-fix?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c)](https://modrinth.com/mod/infinite-fluid-bucket)
+
 Fix some bugs of GregTech CEu Modern.
 # Content
 Due to the lack of developers for GTM 1.21, numerous benign and malicious bugs in GTM 1.21 have remained unpatched for months. To ensure that I (and other players) can play GTM 1.21 normally, I have created this mod. It uses Mixin to modify the code of GTM and LDLIB, thereby fixing the bugs.
@@ -8,8 +12,13 @@ For the specific bugs fixed and their details, please refer to the list below.
 **Attention!** This mod is only intended to make the author's own save file run properly. Therefore, the methods to fix bugs are sometimes radical. There is no guarantee that no new bugs will be introduced, nor is there a guarantee that it is compatible with all snapshot versions. Please make sure to back up your saves when using this mod (in fact, you should back up your saves frequently when playing GTM 1.21 itself).
 
 bugs fixed so far:
-- [#3730](https://github.com/GregTechCEu/GregTech-Modern/issues/3730)
-- [#1607](https://github.com/GregTechCEu/GregTech-Modern/issues/1607)
+- [#3730 Machines don't recognize splitted item stack](https://github.com/GregTechCEu/GregTech-Modern/issues/3730)
+  - `MNotifiableItemStackHandler`
+- [#1607 Can't get stack by EMI from multiblock recipe page](https://github.com/GregTechCEu/GregTech-Modern/issues/1607)
+  - `MSlotWidget`
+  - `GregTechModernBugsFixClient.afterKeyPressed`
+- [#3963 Use prospector in offhand always in ore mode](https://github.com/GregTechCEu/GregTech-Modern/issues/3963)
+  - `MProspectorScannerBehavior`
 # Usage
 You can install this mod directly just like any other mod. As long as it runs, the bug fixes will take effect.
 # Compatibility
